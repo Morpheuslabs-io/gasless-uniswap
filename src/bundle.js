@@ -2,15 +2,15 @@
 let config = {};
 
 config.ropsten= {//addresses
- mDAI: '0x99c3C3C6E280f6aF1F3D22a5DAC6802A2814bc31',
-  mETH: '0x4BF793cc8b3488018CD6C182A6e179D130C99b92',
-  m0x: '0x84B177Faa14e4474dd3b74E9Ba97dB2E8Fe8FF4d',
-  MANA: '0x123fda699AFd052e3139E8Bc41B9fD4397489E5A',
-  mBTC: '0xBBde5bf52eEBca84386523BCeAD0B47013F4673f',
-  mUSDT: '0x9Cf8C345BF0a302c054df749968443F54fb4ea60',
-  factoryAddress: '0x63f8e81F4e7628eC441Bdf508B309EdAE4022c71',
-  routerAddress: '0x438697d6a5EB01f37B1599c82e9Dad56D9603658',
-  EIP712forwarderAddress: '0x062ECA08aE7441528a298b9D81aa23b4B6cad4E5'
+ mDAI: '0x7d59e2Ee1a0deC26D482fa4Da775059495eBC5e4',
+  mETH: '0x6977721C485be668E446C3864a4D095c7c88C8fD',
+  m0x: '0xfd2BA5e3236D988B4A921a37227744Ced9cA9EEe',
+  MANA: '0x26a32A82365ceF26ed187261cA07124c63EA2e5B',
+  mBTC: '0xC609844Bc8B1ce06E28F691CfF56341c215a5f80',
+  mUSDT: '0xF5D9Bc657582dC87be843995aD0586c36b295d38',
+  factoryAddress: '0x2428e362519B9E798373e3aa4ec77D84Dfdf594B',
+  routerAddress: '0x214518E3F451dbFF44e9FaD512800834653F1695',
+  EIP712forwarderAddress: '0x8F36e67F3dEbca5Dea3b5FB5d796BE035502E5A6'
 };
 config.matic={ //addresses
   mDAI: '0xa7E3c50e1050b59c31415537e021e3F9615Cd8FA',
@@ -1398,7 +1398,7 @@ var web3
 var contract
 var erc20Contract
 var biconomy
-var netowrkName
+var networkName
 
 const domainType = [
     { name: 'name', type: 'string' },
@@ -1436,11 +1436,11 @@ let domainDataERC20 = {
     version: '1',
 }
 const showFaucetLink = function () {
-    if (netowrkName == 'ropsten') {
+    if (networkName == 'ropsten') {
         mDAILink = 'https://oneclickdapp.com/cecilia-crash/'
         MANALink = 'https://oneclickdapp.com/velvet-papa/'
     }
-    if (netowrkName == 'matic') {
+    if (networkName == 'matic') {
         mDAILink = 'https://oneclickdapp.com/alias-type/'
         MANALink = 'https://oneclickdapp.com/street-mineral/'
     }
@@ -1471,14 +1471,14 @@ const showFaucetLink = function () {
 const forwarderEIP2585 = async function (_data) {
     var EIP712ForwarderContract = new web3.eth.Contract(
         config.contract.EIP712forwarderABI,
-        config[netowrkName].EIP712forwarderAddress
+        config[networkName].EIP712forwarderAddress
     )
     signer = ethereum.selectedAddress
     var from = signer
-    var to = config[netowrkName].routerAddress
+    var to = config[networkName].routerAddress
     var value = 0
     var chainId = await web3.eth.net.getId()
-    var replayProtection = config[netowrkName].EIP712forwarderAddress
+    var replayProtection = config[networkName].EIP712forwarderAddress
     console.log(chainId)
     var batchId = 0
     var batchNonce = await EIP712ForwarderContract.methods
@@ -1546,10 +1546,10 @@ const forwarderEIP2585 = async function (_data) {
                 console.log(`Transaction hash is ${hash}`)
                 var a = document.createElement('a')
                 let tempString
-                if (netowrkName == 'ropsten') {
+                if (networkName == 'ropsten') {
                     tempString = 'https://ropsten.etherscan.io/tx/' + hash
                 }
-                if (netowrkName == 'matic') {
+                if (networkName == 'matic') {
                     tempString =
                         'https://testnetv3-explorer.matic.network/tx/' + hash
                 }
@@ -1583,14 +1583,14 @@ const connectWallet = async function () {
         console.log(_chainId)
 
         if (_chainId == 3) {
-            netowrkName = 'ropsten'
+            networkName = 'ropsten'
         }
         if (_chainId == 15001) {
-            netowrkName = 'matic'
+            networkName = 'matic'
         }
         showFaucetLink()
         web3 = new Web3(provider)
-        if (netowrkName == 'ropsten') {
+        if (networkName == 'ropsten') {
             biconomy = new Biconomy(window.ethereum, {
                 apiKey: 'sdLlgS_TO.8a399db4-82ec-410c-897b-c77faab1ad1d',
                 debug: 'true',
@@ -1606,7 +1606,7 @@ const connectWallet = async function () {
                     console.log(error)
                 })
         }
-        if (netowrkName == 'matic') {
+        if (networkName == 'matic') {
             biconomy = new Biconomy(window.ethereum, {
                 apiKey: 'Q34QBan9O.1fb12039-9bbe-45d2-a1f9-22cbb2636fe9',
                 debug: 'true',
@@ -1623,7 +1623,7 @@ const connectWallet = async function () {
         }
         contract = new web3.eth.Contract(
             config.contract.routerABI,
-            config[netowrkName].routerAddress
+            config[networkName].routerAddress
         )
 
         //console.log(await contract.methods.getQuote().call());
@@ -1691,14 +1691,14 @@ const getPermit = async function (token, _value) {
     let value = web3.utils.toWei(_value)
     erc20Contract = new web3.eth.Contract(
         config.contract.erc20ABI,
-        config[netowrkName][token]
+        config[networkName][token]
     )
-    console.log(config[netowrkName][token])
+    console.log(config[networkName][token])
     console.log(erc20Contract)
     let message = {}
     var userAddress = ethereum.selectedAddress
     var owner = userAddress
-    var spender = config[netowrkName].routerAddress
+    var spender = config[networkName].routerAddress
     var now = await getNow()
     var deadline = now + 60 * 60
     var nonce = await erc20Contract.methods.nonces(userAddress).call()
@@ -1710,7 +1710,7 @@ const getPermit = async function (token, _value) {
     message.deadline = deadline
 
     domainDataERC20.name = token
-    domainDataERC20.verifyingContract = config[netowrkName][token]
+    domainDataERC20.verifyingContract = config[networkName][token]
 
     const dataToSign = {
         types: {
@@ -1759,8 +1759,8 @@ const getAmountOut = async function (
 ) {
     if (web3 && contract) {
         let path = [
-            config[netowrkName][inputTokenName],
-            config[netowrkName][outputTokenName],
+            config[networkName][inputTokenName],
+            config[networkName][outputTokenName],
         ]
         // let inputAmountDecimals = getAmountWithDecimals(inputAmount)
         // console.log(inputAmountDecimals)
@@ -1784,8 +1784,8 @@ const swapExactTokensForTokens = async function (
     var now = await getNow()
     var deadline = now + 60 * 60
     let path = [
-        config[netowrkName][inputTokenName],
-        config[netowrkName][outputTokenName],
+        config[networkName][inputTokenName],
+        config[networkName][outputTokenName],
     ]
     let amountsOutMin = await getAmountOut(
         amount,
@@ -1801,7 +1801,7 @@ const swapExactTokensForTokens = async function (
             deadline
         )
         .encodeABI()
-    // web3.eth.sendTransaction({from:from,to:config[netowrkName].routerAddress,data:data});
+    // web3.eth.sendTransaction({from:from,to:config[networkName].routerAddress,data:data});
     forwarderEIP2585(data)
 }
 const getBalanceERC20 = async function (ERC20address, wadAddress) {
@@ -1821,7 +1821,7 @@ const getMax = async function (inputElementId, outputElementId) {
     console.log(wadAddress)
     let inputToken = document.getElementById(inputElementId)
     let inputTokenName = inputToken.options[inputToken.selectedIndex].value
-    let inputTokenaddress = config[netowrkName][inputTokenName]
+    let inputTokenaddress = config[networkName][inputTokenName]
     console.log(inputTokenaddress)
     let balance = await getBalanceERC20(inputTokenaddress, wadAddress)
     document.getElementById(outputElementId).value = balance
@@ -1891,8 +1891,8 @@ const addLiquidity = async function () {
 
     let data = contract.methods
         .addLiquidity(
-            config[netowrkName][inputToken1Name],
-            config[netowrkName][inputToken2Name],
+            config[networkName][inputToken1Name],
+            config[networkName][inputToken2Name],
             web3.utils.toWei(inputAmount1.toString(), 'ether'),
             web3.utils.toWei(inputAmount2.toString(), 'ether'),
             0,
@@ -3520,7 +3520,7 @@ module.exports={
   "_args": [
     [
       "@web3-js/websocket@1.0.30",
-      "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src"
+      "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src"
     ]
   ],
   "_from": "@web3-js/websocket@1.0.30",
@@ -3547,7 +3547,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/@web3-js/websocket/-/websocket-1.0.30.tgz",
   "_spec": "1.0.30",
-  "_where": "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src",
+  "_where": "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src",
   "author": {
     "name": "Brian McKelvey",
     "email": "theturtle32@gmail.com",
@@ -23946,7 +23946,7 @@ module.exports={
   "_args": [
     [
       "elliptic@6.3.3",
-      "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src"
+      "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src"
     ]
   ],
   "_from": "elliptic@6.3.3",
@@ -23972,7 +23972,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.3.3.tgz",
   "_spec": "6.3.3",
-  "_where": "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src",
+  "_where": "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -58381,7 +58381,7 @@ module.exports={
   "_args": [
     [
       "elliptic@6.5.2",
-      "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src"
+      "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src"
     ]
   ],
   "_from": "elliptic@6.5.2",
@@ -58405,7 +58405,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz",
   "_spec": "6.5.2",
-  "_where": "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src",
+  "_where": "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -70515,7 +70515,7 @@ module.exports={
   "_args": [
     [
       "elliptic@6.5.2",
-      "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src"
+      "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src"
     ]
   ],
   "_from": "elliptic@6.5.2",
@@ -70539,7 +70539,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz",
   "_spec": "6.5.2",
-  "_where": "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src",
+  "_where": "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -78812,7 +78812,7 @@ module.exports={
   "_args": [
     [
       "web3@1.2.7",
-      "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src"
+      "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src"
     ]
   ],
   "_from": "web3@1.2.7",
@@ -78837,7 +78837,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/web3/-/web3-1.2.7.tgz",
   "_spec": "1.2.7",
-  "_where": "/home/safu/ethereum/maticUniswapWithEIP2585/addLiquidityTry/gasless-uniswap/src",
+  "_where": "/home/trung/Work/reference/morphe/task/dApp/gasless-uniswap/src",
   "author": {
     "name": "ethereum.org"
   },

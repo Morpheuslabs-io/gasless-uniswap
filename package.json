@@ -7,12 +7,18 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf ./build",
+    "build": "npm run clean && npx truffle compile --config truffle-config.js",
+    "migrate": "truffle migrate --network ropsten --config truffle-config.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@truffle/hdwallet-provider": "^1.0.34"
+  },
+  "dependencies": {
+    "truffle": "5.2.1"
   }
 }

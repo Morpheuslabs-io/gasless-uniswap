@@ -6,7 +6,7 @@ var web3
 var contract
 var erc20Contract
 var biconomy
-var netowrkName
+var networkName
 
 const domainType = [
     { name: 'name', type: 'string' },
@@ -44,11 +44,11 @@ let domainDataERC20 = {
     version: '1',
 }
 const showFaucetLink = function () {
-    if (netowrkName == 'ropsten') {
+    if (networkName == 'ropsten') {
         mDAILink = 'https://oneclickdapp.com/cecilia-crash/'
         MANALink = 'https://oneclickdapp.com/velvet-papa/'
     }
-    if (netowrkName == 'matic') {
+    if (networkName == 'matic') {
         mDAILink = 'https://oneclickdapp.com/alias-type/'
         MANALink = 'https://oneclickdapp.com/street-mineral/'
     }
@@ -79,14 +79,14 @@ const showFaucetLink = function () {
 const forwarderEIP2585 = async function (_data) {
     var EIP712ForwarderContract = new web3.eth.Contract(
         config.contract.EIP712forwarderABI,
-        config[netowrkName].EIP712forwarderAddress
+        config[networkName].EIP712forwarderAddress
     )
     signer = ethereum.selectedAddress
     var from = signer
-    var to = config[netowrkName].routerAddress
+    var to = config[networkName].routerAddress
     var value = 0
     var chainId = await web3.eth.net.getId()
-    var replayProtection = config[netowrkName].EIP712forwarderAddress
+    var replayProtection = config[networkName].EIP712forwarderAddress
     console.log(chainId)
     var batchId = 0
     var batchNonce = await EIP712ForwarderContract.methods
@@ -154,10 +154,10 @@ const forwarderEIP2585 = async function (_data) {
                 console.log(`Transaction hash is ${hash}`)
                 var a = document.createElement('a')
                 let tempString
-                if (netowrkName == 'ropsten') {
+                if (networkName == 'ropsten') {
                     tempString = 'https://ropsten.etherscan.io/tx/' + hash
                 }
-                if (netowrkName == 'matic') {
+                if (networkName == 'matic') {
                     tempString =
                         'https://testnetv3-explorer.matic.network/tx/' + hash
                 }
@@ -191,14 +191,14 @@ const connectWallet = async function () {
         console.log(_chainId)
 
         if (_chainId == 3) {
-            netowrkName = 'ropsten'
+            networkName = 'ropsten'
         }
         if (_chainId == 15001) {
-            netowrkName = 'matic'
+            networkName = 'matic'
         }
         showFaucetLink()
         web3 = new Web3(provider)
-        if (netowrkName == 'ropsten') {
+        if (networkName == 'ropsten') {
             biconomy = new Biconomy(window.ethereum, {
                 apiKey: 'sdLlgS_TO.8a399db4-82ec-410c-897b-c77faab1ad1d',
                 debug: 'true',
@@ -214,7 +214,7 @@ const connectWallet = async function () {
                     console.log(error)
                 })
         }
-        if (netowrkName == 'matic') {
+        if (networkName == 'matic') {
             biconomy = new Biconomy(window.ethereum, {
                 apiKey: 'Q34QBan9O.1fb12039-9bbe-45d2-a1f9-22cbb2636fe9',
                 debug: 'true',
@@ -231,7 +231,7 @@ const connectWallet = async function () {
         }
         contract = new web3.eth.Contract(
             config.contract.routerABI,
-            config[netowrkName].routerAddress
+            config[networkName].routerAddress
         )
 
         //console.log(await contract.methods.getQuote().call());
@@ -299,14 +299,14 @@ const getPermit = async function (token, _value) {
     let value = web3.utils.toWei(_value)
     erc20Contract = new web3.eth.Contract(
         config.contract.erc20ABI,
-        config[netowrkName][token]
+        config[networkName][token]
     )
-    console.log(config[netowrkName][token])
+    console.log(config[networkName][token])
     console.log(erc20Contract)
     let message = {}
     var userAddress = ethereum.selectedAddress
     var owner = userAddress
-    var spender = config[netowrkName].routerAddress
+    var spender = config[networkName].routerAddress
     var now = await getNow()
     var deadline = now + 60 * 60
     var nonce = await erc20Contract.methods.nonces(userAddress).call()
@@ -318,7 +318,7 @@ const getPermit = async function (token, _value) {
     message.deadline = deadline
 
     domainDataERC20.name = token
-    domainDataERC20.verifyingContract = config[netowrkName][token]
+    domainDataERC20.verifyingContract = config[networkName][token]
 
     const dataToSign = {
         types: {
@@ -367,8 +367,8 @@ const getAmountOut = async function (
 ) {
     if (web3 && contract) {
         let path = [
-            config[netowrkName][inputTokenName],
-            config[netowrkName][outputTokenName],
+            config[networkName][inputTokenName],
+            config[networkName][outputTokenName],
         ]
         // let inputAmountDecimals = getAmountWithDecimals(inputAmount)
         // console.log(inputAmountDecimals)
@@ -392,8 +392,8 @@ const swapExactTokensForTokens = async function (
     var now = await getNow()
     var deadline = now + 60 * 60
     let path = [
-        config[netowrkName][inputTokenName],
-        config[netowrkName][outputTokenName],
+        config[networkName][inputTokenName],
+        config[networkName][outputTokenName],
     ]
     let amountsOutMin = await getAmountOut(
         amount,
@@ -409,7 +409,7 @@ const swapExactTokensForTokens = async function (
             deadline
         )
         .encodeABI()
-    // web3.eth.sendTransaction({from:from,to:config[netowrkName].routerAddress,data:data});
+    // web3.eth.sendTransaction({from:from,to:config[networkName].routerAddress,data:data});
     forwarderEIP2585(data)
 }
 const getBalanceERC20 = async function (ERC20address, wadAddress) {
@@ -429,7 +429,7 @@ const getMax = async function (inputElementId, outputElementId) {
     console.log(wadAddress)
     let inputToken = document.getElementById(inputElementId)
     let inputTokenName = inputToken.options[inputToken.selectedIndex].value
-    let inputTokenaddress = config[netowrkName][inputTokenName]
+    let inputTokenaddress = config[networkName][inputTokenName]
     console.log(inputTokenaddress)
     let balance = await getBalanceERC20(inputTokenaddress, wadAddress)
     document.getElementById(outputElementId).value = balance
@@ -499,8 +499,8 @@ const addLiquidity = async function () {
 
     let data = contract.methods
         .addLiquidity(
-            config[netowrkName][inputToken1Name],
-            config[netowrkName][inputToken2Name],
+            config[networkName][inputToken1Name],
+            config[networkName][inputToken2Name],
             web3.utils.toWei(inputAmount1.toString(), 'ether'),
             web3.utils.toWei(inputAmount2.toString(), 'ether'),
             0,

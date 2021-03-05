@@ -93,6 +93,9 @@ module.exports = function(deployer, network, accounts) {
       "EIP712forwarderAddress":EIP712ForwarderContract.address
     }
     console.log(addresses);
+
+    console.log('addLiquidity - running ...');
+
     for (i = 0; i < 6; i++) {
       for (j = i + 1; j < 6; j++) {
         await erc20[i].approve(routerContract.address, liquidityAmount);
@@ -109,7 +112,7 @@ module.exports = function(deployer, network, accounts) {
         );
       }
     }
-    console.log("uidityDone");
+    console.log('addLiquidity - done');
     
     console.log((await factoryContract.allPairsLength()).toString());
     var swapAmount = getAmountWithDecimals(10);

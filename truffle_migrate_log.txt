@@ -1,0 +1,201 @@
+Starting migrations...
+======================
+> Network name:    'ropsten'
+> Network id:      3
+> Block gas limit: 8000029 (0x7a121d)
+
+
+3_deploy_contracts.js
+=====================
+
+   Deploying 'MDAI'
+   ----------------
+   > transaction hash:    0x54ce42e120d89ef672bb1e2b25a26376ee509f54136894017047324401c35cb3
+   > Blocks: 2            Seconds: 37
+   > contract address:    0x7d59e2Ee1a0deC26D482fa4Da775059495eBC5e4
+   > block number:        9781487
+   > block timestamp:     1614962700
+   > account:             0xA7fc2009cc8B36997Ef533deC396d6B4B00760E4
+   > balance:             5.562691492914112984
+   > gas used:            1151645 (0x11929d)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0230329 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 9781488)
+   > confirmation number: 2 (block: 9781489)
+
+   Deploying 'METH'
+   ----------------
+   > transaction hash:    0xeab9beec5aeded4452a6b52f48c10226466c9fa4dcbe30c6aeb4570063721702
+   > Blocks: 1            Seconds: 53
+   > contract address:    0x6977721C485be668E446C3864a4D095c7c88C8fD
+   > block number:        9781491
+   > block timestamp:     1614962829
+   > account:             0xA7fc2009cc8B36997Ef533deC396d6B4B00760E4
+   > balance:             5.539658592914112984
+   > gas used:            1151645 (0x11929d)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0230329 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 9781492)
+   > confirmation number: 2 (block: 9781493)
+
+   Deploying 'M0x'
+   ---------------
+   > transaction hash:    0x312d48aea8954766998d7bfa2bcde369fa684c824a25e9c40e8cac91b598feae
+   > Blocks: 1            Seconds: 21
+   > contract address:    0xfd2BA5e3236D988B4A921a37227744Ced9cA9EEe
+   > block number:        9781494
+   > block timestamp:     1614962874
+   > account:             0xA7fc2009cc8B36997Ef533deC396d6B4B00760E4
+   > balance:             5.516626172914112984
+   > gas used:            1151621 (0x119285)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.02303242 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 9781495)
+   > confirmation number: 2 (block: 9781496)
+
+   Deploying 'MANA'
+   ----------------
+   > transaction hash:    0x766347488f4e26f6e1bcddf2477de2445a682f2d83c065ec683f76aaf3567c84
+   > Blocks: 1            Seconds: 53
+   > contract address:    0x26a32A82365ceF26ed187261cA07124c63EA2e5B
+   > block number:        9781497
+   > block timestamp:     1614963008
+   > account:             0xA7fc2009cc8B36997Ef533deC396d6B4B00760E4
+   > balance:             5.493593272914112984
+   > gas used:            1151645 (0x11929d)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0230329 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 9781498)
+   > confirmation number: 2 (block: 9781499)
+
+   Deploying 'MBTC'
+   ----------------
+   > transaction hash:    0x4caa39d03ba34795df63df0cf609d016cbb6d1379b9e74765ea569d476c80a1a
+   > Blocks: 2            Seconds: 13
+   > contract address:    0xC609844Bc8B1ce06E28F691CfF56341c215a5f80
+   > block number:        9781501
+   > block timestamp:     1614963125
+   > account:             0xA7fc2009cc8B36997Ef533deC396d6B4B00760E4
+   > balance:             5.470560372914112984
+   > gas used:            1151645 (0x11929d)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0230329 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 9781504)
+   > confirmation number: 2 (block: 9781505)
+
+   Deploying 'MUSDT'
+   -----------------
+   > transaction hash:    0x7e0841767726cca2bc176110247323cc81a34420a87f5305fdde5d5eb1e493cb
+   > Blocks: 1            Seconds: 101
+   > contract address:    0xF5D9Bc657582dC87be843995aD0586c36b295d38
+   > block number:        9781506
+   > block timestamp:     1614963157
+   > account:             0xA7fc2009cc8B36997Ef533deC396d6B4B00760E4
+   > balance:             5.447526992914112984
+   > gas used:            1151669 (0x1192b5)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.02303338 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 9781507)
+   > confirmation number: 2 (block: 9781508)
+
+   Deploying 'UniswapV2Router01'
+   -----------------------------
+   > transaction hash:    0x4f8b32cc2ecb56ac2be861bbfe3979563823a07f032ac7c9bb5ea933645ec40e
+   > Blocks: 2            Seconds: 29
+   > contract address:    0x214518E3F451dbFF44e9FaD512800834653F1695
+   > block number:        9781510
+   > block timestamp:     1614963303
+   > account:             0xA7fc2009cc8B36997Ef533deC396d6B4B00760E4
+   > balance:             5.359249192914112984
+   > gas used:            4413890 (0x4359c2)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0882778 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 9781511)
+   > confirmation number: 2 (block: 9781512)
+1614963387
+{
+  mDAI: '0x7d59e2Ee1a0deC26D482fa4Da775059495eBC5e4',
+  mETH: '0x6977721C485be668E446C3864a4D095c7c88C8fD',
+  m0x: '0xfd2BA5e3236D988B4A921a37227744Ced9cA9EEe',
+  MANA: '0x26a32A82365ceF26ed187261cA07124c63EA2e5B',
+  mBTC: '0xC609844Bc8B1ce06E28F691CfF56341c215a5f80',
+  mUSDT: '0xF5D9Bc657582dC87be843995aD0586c36b295d38',
+  factoryAddress: '0x2428e362519B9E798373e3aa4ec77D84Dfdf594B',
+  routerAddress: '0x214518E3F451dbFF44e9FaD512800834653F1695',
+  EIP712forwarderAddress: '0x8F36e67F3dEbca5Dea3b5FB5d796BE035502E5A6'
+}
+uidityDone
+16
+950000000000000000000000
+950009960069810399032164
+Result {
+  '0': BN {
+    negative: 0,
+    words: [ 55757980, 31506553, 2218234, <1 empty item> ],
+    length: 3,
+    red: null
+  },
+  '1': BN {
+    negative: 0,
+    words: [ 2621440, 33238991, 2222666, <1 empty item> ],
+    length: 3,
+    red: null
+  },
+  reserveA: BN {
+    negative: 0,
+    words: [ 55757980, 31506553, 2218234, <1 empty item> ],
+    length: 3,
+    red: null
+  },
+  reserveB: BN {
+    negative: 0,
+    words: [ 2621440, 33238991, 2222666, <1 empty item> ],
+    length: 3,
+    red: null
+  }
+}
+BN {
+  negative: 0,
+  words: [ 60133375, 43612433, 44497, <1 empty item> ],
+  length: 3,
+  red: null
+}
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:           0.2264752 ETH
+
+
+Summary
+=======
+> Total deployments:   7
+> Final cost:          0.2264752 ETH
