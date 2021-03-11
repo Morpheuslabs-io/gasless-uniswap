@@ -1,6 +1,8 @@
 # Gasless UniSwap
 
-This dApp enables to decentralized swapping of ERC20 tokens without the need of holding ETH to pay for tx fee
+This dApp enables decentralized swapping of ERC20 tokens without the need of holding ETH to pay for tx fee
+
+Currently-supported network is Ropsten Ethereum Testnet
 
 ===================
 
