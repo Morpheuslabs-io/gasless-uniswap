@@ -1444,6 +1444,7 @@ const showFaucetLink = function () {
         mDAILink = 'https://oneclickdapp.com/alias-type/'
         MANALink = 'https://oneclickdapp.com/street-mineral/'
     }
+    return
     var a = document.createElement('a')
     a.href = mDAILink
     a.title = 'faucet'
