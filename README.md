@@ -1,5 +1,7 @@
 # Gasless UniSwap
 
+This dApp enables to decentralized swapping of ERC20 tokens without the need of holding ETH to pay for tx fee
+
 ===================
 
 Morpheus Labs forked this source code from https://github.com/yashnaman/gasless-uniswap as a reference source for `gasless UniSwap` demo. Users can explore, modify and test the protocol on Morpheus Labs SEED platform.
